@@ -1,0 +1,53 @@
+<div class="page-hero">
+  <div class="container">
+    <span class="subtitle-tag">What We Offer</span>
+    <h1>Our Dental Services</h1>
+    <p>Comprehensive care for your complete oral health — at every stage of life.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    @if (loading()) {
+      <app-page-loader />
+    } @else {
+      <div class="services-detail-grid">
+        @for (service of services(); track service.id) {
+          <article class="service-detail-card animate-on-scroll">
+            <div class="sdc-icon">{{ service.icon }}</div>
+            <div class="sdc-body">
+              <h2 class="sdc-name">{{ service.name }}</h2>
+              <p class="sdc-desc">{{ service.description }}</p>
+              <div class="sdc-meta">
+                <div class="sdc-meta-item">
+                  <span class="sdc-meta-label">⏱ Duration</span>
+                  <span class="sdc-meta-value">{{ service.duration }} min</span>
+                </div>
+                <div class="sdc-meta-item">
+                  <span class="sdc-meta-label">💰 Price Range</span>
+                  <span class="sdc-meta-value">{{ service.price }}</span>
+                </div>
+              </div>
+              <a
+                routerLink="/appointments"
+                [queryParams]="{ service: service.id }"
+                class="btn btn--primary"
+              >📅 Book for This Service</a>
+            </div>
+          </article>
+        }
+      </div>
+    }
+  </div>
+</section>
+
+<!-- CTA Strip -->
+<div class="services-cta-strip">
+  <div class="container">
+    <p>Not sure which service you need? <strong>Call us</strong> — our team will guide you.</p>
+    <div class="cta-strip-actions">
+      <a href="tel:+919876543210" class="btn btn--accent">📞 Call Now</a>
+      <a routerLink="/contact" class="btn btn--outline-primary">Get in Touch</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="page-hero">
+  <div class="container">
+    <span class="subtitle-tag">Our Specialists</span>
+    <h1>Meet Our Doctors</h1>
+    <p>Experienced, compassionate specialists dedicated to your dental health and beautiful smile.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    @if (loading()) {
+      <app-page-loader />
+    } @else {
+      <div class="doctors-grid">
+        @for (doctor of doctors(); track doctor.id) {
+          <article class="doctor-card animate-on-scroll">
+            <div class="doctor-header">
+              <div class="doctor-avatar" aria-hidden="true">
+                {{ getInitials(doctor.name) }}
+              </div>
+              <span
+                class="availability-badge"
+                [class.available]="doctor.available"
+                [class.unavailable]="!doctor.available"
+              >
+                @if (doctor.available) {
+                  ✓ Available Today
+                } @else {
+                  ✗ Not Available
+                }
+              </span>
+            </div>
+
+            <div class="doctor-info">
+              <h2 class="doctor-name">{{ doctor.name }}</h2>
+              <p class="doctor-specialization">{{ doctor.specialization }}</p>
+              <div class="doctor-experience">
+                <span class="exp-badge">{{ doctor.experience }} years experience</span>
+              </div>
+              <p class="doctor-bio">{{ doctor.bio }}</p>
+            </div>
+
+            <div class="doctor-footer">
+              <a
+                routerLink="/appointments"
+                [queryParams]="{ doctorId: doctor.id }"
+                class="btn btn--primary"
+                [class.disabled-btn]="!doctor.available"
+              >
+                @if (doctor.available) {
+                  📅 Book Appointment
+                } @else {
+                  📅 Check Availability
+                }
+              </a>
+            </div>
+          </article>
+        }
+      </div>
+    }
+  </div>
+</section>
+
+<div class="doctors-note">
+  <div class="container">
+    <p>🗓️ Availability is subject to change. <a routerLink="/contact">Contact us</a> for the latest schedule.</p>
+  </div>
+</div>

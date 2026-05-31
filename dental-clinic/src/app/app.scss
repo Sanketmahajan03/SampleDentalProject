@@ -1,0 +1,24 @@
+// Route fade transition using the browser View Transitions API (Angular withViewTransitions)
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.2s;
+  animation-timing-function: ease;
+}
+
+::view-transition-old(root) {
+  animation-name: page-fade-out;
+}
+
+::view-transition-new(root) {
+  animation-name: page-fade-in;
+}
+
+@keyframes page-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes page-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

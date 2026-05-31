@@ -1,0 +1,120 @@
+.filter-tabs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+  justify-content: center;
+}
+
+.filter-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 22px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--border);
+  background: var(--white);
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 44px;
+
+  &:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--primary-pale);
+  }
+
+  &.active {
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+/* Masonry CSS Grid */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
+  gap: 16px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 180px;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 200px;
+  }
+}
+
+.gallery-item {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: var(--shadow-sm);
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-lg);
+
+    .gallery-overlay {
+      opacity: 1;
+    }
+  }
+
+  &--tall {
+    grid-row: span 2;
+  }
+
+  &--wide {
+    grid-column: span 2;
+
+    @media (max-width: 480px) {
+      grid-column: span 1;
+    }
+  }
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 60%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 18px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-label {
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: block;
+}
+
+.gallery-category {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.75rem;
+  display: block;
+  margin-top: 3px;
+}
+
+.no-items {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1rem;
+  padding: 60px 0;
+}

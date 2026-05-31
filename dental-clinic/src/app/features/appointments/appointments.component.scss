@@ -1,0 +1,337 @@
+.trust-strip {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  justify-content: center;
+
+  span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.12);
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+}
+
+/* Layout */
+.appt-section {
+  background: var(--bg);
+}
+
+.form-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 40px;
+  align-items: start;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Form */
+.appointment-form {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.form-section {
+  padding: 32px;
+  border-bottom: 1px solid var(--border);
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+}
+
+.form-section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+
+.section-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: var(--primary);
+  color: var(--white);
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: var(--font-sans);
+  flex-shrink: 0;
+}
+
+.optional-tag {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: var(--bg);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.required {
+  color: #D32F2F;
+}
+
+.hint {
+  font-weight: 400;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  margin-left: 6px;
+}
+
+.char-count {
+  text-align: right;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 6px;
+
+  &.over {
+    color: #D32F2F;
+    font-weight: 700;
+  }
+}
+
+.form-submit {
+  padding: 28px 32px;
+  background: var(--primary-pale);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+}
+
+.submit-btn {
+  padding: 14px 40px;
+  font-size: 1rem;
+  flex-shrink: 0;
+  position: relative;
+
+  &.loading {
+    opacity: 0.75;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+.btn-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: var(--white);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin-right: 6px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.form-disclaimer {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Sidebar */
+.appt-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @media (max-width: 1024px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sidebar-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+
+  h3 {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  p {
+    font-size: 0.875rem;
+    color: var(--text-body);
+    line-height: 1.65;
+  }
+
+  &.emergency {
+    background: linear-gradient(135deg, #FFF3E0, #FFF8E1);
+    border-color: #FFB300;
+
+    h3 { color: #E65100; }
+  }
+}
+
+.hours-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hours-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.82rem;
+  color: var(--text-body);
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+
+  &:last-child { border-bottom: none; }
+
+  &.closed span:last-child {
+    color: #D32F2F;
+    font-weight: 700;
+  }
+
+  span:first-child { color: var(--text-muted); }
+  span:last-child { font-weight: 600; }
+}
+
+.emergency-btn {
+  width: 100%;
+  margin-top: 12px;
+  justify-content: center;
+}
+
+/* Success Card */
+.success-card {
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 48px 40px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+
+  @media (max-width: 640px) {
+    padding: 36px 24px;
+  }
+}
+
+.success-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  animation: bounce-in 0.5s ease-out;
+}
+
+@keyframes bounce-in {
+  0%   { transform: scale(0.5); opacity: 0; }
+  70%  { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.success-card h2 {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.success-card > p {
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  line-height: 1.7;
+}
+
+.booking-summary {
+  background: var(--primary-pale);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  margin-bottom: 28px;
+  text-align: left;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.875rem;
+
+  &:last-child { border-bottom: none; }
+}
+
+.summary-label {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.summary-value {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.ref-id {
+  font-family: monospace;
+  background: var(--white);
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: var(--primary);
+}
+
+.status-pending {
+  color: #E65100;
+  text-transform: capitalize;
+}
+
+.success-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}

@@ -1,0 +1,374 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* ═══════════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════════ */
+:root {
+  // Colors
+  --primary:       #1565C0;
+  --primary-light: #1E88E5;
+  --primary-pale:  #E3F2FD;
+  --accent:        #00ACC1;
+  --accent-pale:   #E0F7FA;
+  --success:       #2E7D32;
+  --text:          #1A237E;
+  --text-body:     #37474F;
+  --text-muted:    #78909C;
+  --white:         #FFFFFF;
+  --bg:            #F8FAFE;
+  --bg-card:       #FFFFFF;
+  --border:        rgba(21, 101, 192, 0.12);
+
+  // Typography
+  --font-sans:  'Nunito', sans-serif;
+  --font-serif: 'Merriweather', serif;
+
+  // Border Radius
+  --radius-sm:   8px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-full: 9999px;
+
+  // Shadows (blue-tinted)
+  --shadow-sm: 0 2px 8px  rgba(21, 101, 192, 0.08);
+  --shadow-md: 0 4px 16px rgba(21, 101, 192, 0.12);
+  --shadow-lg: 0 8px 32px rgba(21, 101, 192, 0.16);
+}
+
+/* ═══════════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-body);
+  background: var(--bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  color: var(--text);
+  line-height: 1.3;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-sans);
+}
+
+input, select, textarea {
+  font-family: var(--font-sans);
+}
+
+/* ═══════════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════════ */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+
+  @media (max-width: 480px) { padding: 0 16px; }
+}
+
+.main-content {
+  padding-top: 76px; // offset for fixed header
+  min-height: 100vh;
+}
+
+/* ═══════════════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.925rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  white-space: nowrap;
+  min-height: 44px;
+  line-height: 1;
+
+  &--primary {
+    background: var(--primary);
+    color: var(--white);
+
+    &:hover {
+      background: var(--primary-light);
+      transform: scale(1.02);
+      box-shadow: var(--shadow-md);
+    }
+  }
+
+  &--accent {
+    background: var(--accent);
+    color: var(--white);
+
+    &:hover {
+      background: #0097A7;
+      transform: scale(1.02);
+      box-shadow: var(--shadow-md);
+    }
+  }
+
+  &--outline {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid rgba(255, 255, 255, 0.75);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--white);
+    }
+  }
+
+  &--outline-primary {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+
+    &:hover {
+      background: var(--primary-pale);
+      box-shadow: var(--shadow-sm);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   SECTIONS
+═══════════════════════════════════════════════ */
+.section {
+  padding: 80px 0;
+
+  @media (max-width: 768px) { padding: 60px 0; }
+  @media (max-width: 480px) { padding: 48px 0; }
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 48px;
+
+  h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 580px;
+    margin: 0 auto;
+    line-height: 1.75;
+  }
+}
+
+.subtitle-tag {
+  display: inline-block;
+  background: var(--primary-pale);
+  color: var(--primary);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+  margin-bottom: 14px;
+}
+
+/* ═══════════════════════════════════════════════
+   PAGE HERO (reused on inner pages)
+═══════════════════════════════════════════════ */
+.page-hero {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 55%, var(--accent) 100%);
+  color: var(--white);
+  padding: 80px 0;
+  text-align: center;
+
+  .subtitle-tag {
+    background: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: var(--white);
+    margin: 12px 0 16px;
+  }
+
+  p {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 768px) {
+    padding: 60px 0;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   FORMS (global form controls)
+═══════════════════════════════════════════════ */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    font-weight: 600;
+    color: var(--text);
+    font-size: 0.875rem;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 11px 14px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-sans);
+    font-size: 0.925rem;
+    color: var(--text-body);
+    background: var(--white);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    min-height: 44px;
+    appearance: none;
+
+    &:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(21, 101, 192, 0.1);
+    }
+
+    &.error {
+      border-color: #D32F2F;
+
+      &:focus {
+        box-shadow: 0 0 0 4px rgba(211, 47, 47, 0.1);
+      }
+    }
+
+    &::placeholder { color: var(--text-muted); }
+  }
+
+  select.form-control {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath fill='%2378909C' d='M5 7L0 0h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 38px;
+    cursor: pointer;
+  }
+
+  textarea.form-control {
+    resize: vertical;
+    min-height: 110px;
+    line-height: 1.6;
+  }
+
+  .error-msg {
+    color: #D32F2F;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   SCROLL ANIMATIONS
+═══════════════════════════════════════════════ */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  // Stagger children inside grids
+  @for $i from 1 through 12 {
+    &:nth-child(#{$i}) {
+      transition-delay: #{($i - 1) * 0.07}s;
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   SCROLLBAR (subtle)
+═══════════════════════════════════════════════ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-pale);
+  border-radius: 3px;
+
+  &:hover {
+    background: var(--primary-light);
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   FOCUS VISIBLE (accessibility)
+═══════════════════════════════════════════════ */
+:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}

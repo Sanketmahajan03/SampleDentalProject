@@ -1,0 +1,169 @@
+<!-- ═══════════════════════════════════ HERO ═══════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__shapes" aria-hidden="true">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+
+  <div class="container">
+    <div class="hero__content">
+      <span class="hero__badge animate-on-scroll">🦷 Pune's Most Trusted Dental Clinic</span>
+      <h1 class="hero__title animate-on-scroll">
+        Your Smile,<br>Our <em>Priority</em>
+      </h1>
+      <p class="hero__subtitle animate-on-scroll">
+        Experience world-class dental care at SmileCare — where advanced technology meets compassionate service.
+        Trusted by 5,000+ patients across Pune for 15+ years.
+      </p>
+      <div class="hero__actions animate-on-scroll">
+        <a routerLink="/appointments" class="btn btn--accent hero-btn">
+          📅 Book Appointment
+        </a>
+        <a routerLink="/services" class="btn btn--outline">
+          Our Services →
+        </a>
+      </div>
+    </div>
+
+    <div class="hero__cards" aria-hidden="true">
+      <div class="hero-float-card card-a">
+        <span>😁</span>
+        <span>Teeth Whitening</span>
+      </div>
+      <div class="hero-float-card card-b">
+        <span>⚙️</span>
+        <span>Implants</span>
+      </div>
+      <div class="hero-float-card card-c">
+        <span>✓</span>
+        <span>Pain-Free</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__scroll-cue" aria-hidden="true">
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ STATS BAR ═══════════════════════════════════ -->
+<section class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      @for (stat of stats; track stat.label) {
+        <div class="stat-item animate-on-scroll">
+          <span class="stat-icon" aria-hidden="true">{{ stat.icon }}</span>
+          <span class="stat-value">{{ stat.value }}</span>
+          <span class="stat-label">{{ stat.label }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ SERVICES PREVIEW ═══════════════════════════════════ -->
+<section class="section services-section">
+  <div class="container">
+    <div class="section-title animate-on-scroll">
+      <span class="subtitle-tag">What We Offer</span>
+      <h2>Our Dental Services</h2>
+      <p>Comprehensive, personalized dental care using the latest techniques and technology — for every stage of life.</p>
+    </div>
+
+    @if (loading()) {
+      <app-page-loader />
+    } @else {
+      <div class="services-grid">
+        @for (service of services(); track service.id) {
+          <div class="service-card animate-on-scroll">
+            <div class="service-icon" aria-hidden="true">{{ service.icon }}</div>
+            <h3 class="service-name">{{ service.name }}</h3>
+            <p class="service-desc">{{ service.description }}</p>
+            <div class="service-footer">
+              <span class="service-price">{{ service.price }}</span>
+              <a
+                routerLink="/appointments"
+                [queryParams]="{ service: service.id }"
+                class="btn btn--outline-primary service-btn"
+              >Book</a>
+            </div>
+          </div>
+        }
+      </div>
+    }
+
+    <div class="text-center animate-on-scroll" style="margin-top: 40px;">
+      <a routerLink="/services" class="btn btn--primary">View All Services →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ WHY US ═══════════════════════════════════ -->
+<section class="section why-section">
+  <div class="container">
+    <div class="section-title animate-on-scroll">
+      <span class="subtitle-tag">Why SmileCare</span>
+      <h2>Why Choose Us?</h2>
+      <p>We combine expertise, innovation, and genuine care to deliver an exceptional dental experience.</p>
+    </div>
+
+    <div class="why-grid">
+      @for (f of features; track f.title) {
+        <div class="why-card animate-on-scroll">
+          <div class="why-icon" aria-hidden="true">{{ f.icon }}</div>
+          <h3>{{ f.title }}</h3>
+          <p>{{ f.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ TESTIMONIALS ═══════════════════════════════════ -->
+<section class="section testimonials-section">
+  <div class="container">
+    <div class="section-title animate-on-scroll">
+      <span class="subtitle-tag">Patient Stories</span>
+      <h2>What Our Patients Say</h2>
+      <p>Thousands of happy smiles across Pune. Here are just a few of their stories.</p>
+    </div>
+
+    <div class="testimonials-grid">
+      @for (t of testimonials(); track t.id) {
+        <div class="testimonial-card animate-on-scroll">
+          <div class="testimonial-stars" aria-label="{{ t.rating }} out of 5 stars">
+            @for (star of starArray(t.rating); track $index) {
+              <span class="star" aria-hidden="true">★</span>
+            }
+          </div>
+          <p class="testimonial-comment">"{{ t.comment }}"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" aria-hidden="true">{{ t.name[0] }}</div>
+            <div class="testimonial-info">
+              <div class="testimonial-name">{{ t.name }}</div>
+              <div class="testimonial-meta">{{ t.treatment }} · {{ t.location }}</div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ FINAL CTA ═══════════════════════════════════ -->
+<section class="cta-banner">
+  <div class="cta-shapes" aria-hidden="true">
+    <div class="cta-shape-1"></div>
+    <div class="cta-shape-2"></div>
+  </div>
+  <div class="container">
+    <div class="cta-content animate-on-scroll">
+      <h2>Ready for a Healthier Smile?</h2>
+      <p>Book your appointment today and take the first step toward perfect dental health. Same-day appointments available.</p>
+      <a routerLink="/appointments" class="btn btn--accent cta-main-btn">
+        Book Appointment Now →
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,161 @@
+<div class="page-hero">
+  <div class="container">
+    <span class="subtitle-tag">Get in Touch</span>
+    <h1>Contact Us</h1>
+    <p>We'd love to hear from you. Reach out for appointments, queries, or feedback.</p>
+  </div>
+</div>
+
+<section class="section contact-section">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- ─── CONTACT FORM ─── -->
+      <div class="contact-form-wrap animate-on-scroll">
+        @if (contactSuccess()) {
+          <div class="contact-success">
+            <div class="contact-success-icon">✅</div>
+            <h3>Message Sent!</h3>
+            <p>Thank you for reaching out. We'll get back to you within 24 hours.</p>
+            <button (click)="sendAnother()" class="btn btn--outline-primary">Send Another Message</button>
+          </div>
+        } @else {
+          <h2 class="contact-form-title">Send Us a Message</h2>
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="contact-form">
+            <div class="form-group">
+              <label for="cname">Your Name <span class="required">*</span></label>
+              <input
+                id="cname"
+                type="text"
+                formControlName="name"
+                class="form-control"
+                [class.error]="submitted() && f.name.invalid"
+                placeholder="Full name"
+                autocomplete="name"
+              />
+              @if (submitted() && f.name.errors?.['required']) {
+                <span class="error-msg">Name is required.</span>
+              }
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="cemail">Email <span class="required">*</span></label>
+                <input
+                  id="cemail"
+                  type="email"
+                  formControlName="email"
+                  class="form-control"
+                  [class.error]="submitted() && f.email.invalid"
+                  placeholder="your@email.com"
+                  autocomplete="email"
+                />
+                @if (submitted() && f.email.errors?.['required']) {
+                  <span class="error-msg">Email is required.</span>
+                }
+                @if (submitted() && f.email.errors?.['email']) {
+                  <span class="error-msg">Enter a valid email.</span>
+                }
+              </div>
+
+              <div class="form-group">
+                <label for="cphone">Phone <span class="required">*</span></label>
+                <input
+                  id="cphone"
+                  type="tel"
+                  formControlName="phone"
+                  class="form-control"
+                  [class.error]="submitted() && f.phone.invalid"
+                  placeholder="10-digit mobile"
+                  maxlength="10"
+                  autocomplete="tel"
+                />
+                @if (submitted() && f.phone.errors?.['required']) {
+                  <span class="error-msg">Phone is required.</span>
+                }
+                @if (submitted() && f.phone.errors?.['pattern']) {
+                  <span class="error-msg">Enter a valid Indian mobile number.</span>
+                }
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="cmessage">Message <span class="required">*</span></label>
+              <textarea
+                id="cmessage"
+                formControlName="message"
+                class="form-control"
+                [class.error]="submitted() && f.message.invalid"
+                placeholder="How can we help you?"
+                rows="5"
+              ></textarea>
+              @if (submitted() && f.message.errors?.['required']) {
+                <span class="error-msg">Message is required.</span>
+              }
+              @if (submitted() && f.message.errors?.['maxlength']) {
+                <span class="error-msg">Message cannot exceed 500 characters.</span>
+              }
+            </div>
+
+            <button type="submit" class="btn btn--primary submit-btn">
+              ✉️ Send Message
+            </button>
+          </form>
+        }
+      </div>
+
+      <!-- ─── INFO PANEL ─── -->
+      <div class="contact-info animate-on-scroll">
+        <div class="info-card">
+          <h3 class="info-title">📍 Find Us</h3>
+          <p class="info-text">{{ address }}</p>
+        </div>
+
+        <div class="info-card">
+          <h3 class="info-title">📞 Call Us</h3>
+          <a [href]="'tel:+91' + phone" class="info-link phone-link">
+            {{ phone | phoneFormat }}
+          </a>
+        </div>
+
+        <div class="info-card">
+          <h3 class="info-title">✉️ Email Us</h3>
+          <a [href]="'mailto:' + email" class="info-link">{{ email }}</a>
+        </div>
+
+        <div class="info-card">
+          <h3 class="info-title">🕐 Working Hours</h3>
+          <div class="hours-table-contact">
+            @for (row of workingHours; track row.day) {
+              <div class="hours-row-contact" [class.closed-row]="row.hours === 'Closed'">
+                <span>{{ row.day }}</span>
+                <span>{{ row.hours }}</span>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Emergency -->
+        <div class="info-card emergency-card">
+          <h3 class="info-title">🚨 Dental Emergency?</h3>
+          <p>Available for after-hours dental emergencies. Call our emergency line immediately.</p>
+          <a [href]="'tel:+91' + emergencyPhone" class="btn btn--accent emergency-call-btn">
+            📞 Emergency: {{ emergencyPhone | phoneFormat }}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map -->
+    <div class="map-wrap animate-on-scroll">
+      <iframe
+        [src]="mapUrl"
+        class="map-iframe"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="SmileCare Dental Clinic location on Google Maps"
+      ></iframe>
+    </div>
+  </div>
+</section>

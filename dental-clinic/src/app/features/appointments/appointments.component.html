@@ -1,0 +1,301 @@
+<div class="page-hero">
+  <div class="container">
+    <span class="subtitle-tag">Schedule a Visit</span>
+    <h1>Book an Appointment</h1>
+    <p>Schedule your visit in minutes. We'll confirm within 2 hours during working hours.</p>
+    <div class="trust-strip">
+      <span>✓ Free First Consultation</span>
+      <span>✓ Same-Day Slots Available</span>
+      <span>✓ No Hidden Fees</span>
+    </div>
+  </div>
+</div>
+
+<section class="section appt-section">
+  <div class="container">
+
+    <!-- ─── SUCCESS STATE ─── -->
+    @if (submitSuccess()) {
+      <div class="success-card animate-on-scroll">
+        <div class="success-icon">🎉</div>
+        <h2>Appointment Booked!</h2>
+        <p>We've received your request. Our team will call you to confirm the appointment.</p>
+
+        @if (bookedAppointment(); as appt) {
+          <div class="booking-summary">
+            <div class="summary-row">
+              <span class="summary-label">Ref ID</span>
+              <span class="summary-value ref-id">#{{ appt.id.slice(0, 8).toUpperCase() }}</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-label">Name</span>
+              <span class="summary-value">{{ appt.patientName }}</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-label">Date</span>
+              <span class="summary-value">{{ appt.date }}</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-label">Time</span>
+              <span class="summary-value">{{ appt.timeSlot }}</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-label">Status</span>
+              <span class="summary-value status-pending">{{ appt.status }}</span>
+            </div>
+          </div>
+        }
+
+        <div class="success-actions">
+          <button (click)="bookAnother()" class="btn btn--outline-primary">Book Another</button>
+          <a routerLink="/" class="btn btn--primary">Back to Home</a>
+        </div>
+      </div>
+    } @else {
+      <!-- ─── BOOKING FORM ─── -->
+      <div class="form-layout">
+        <form
+          [formGroup]="form"
+          (ngSubmit)="onSubmit()"
+          class="appointment-form animate-on-scroll"
+          novalidate
+        >
+
+          <!-- SECTION 1: Personal Info -->
+          <div class="form-section">
+            <h3 class="form-section-title">
+              <span class="section-number">1</span>
+              Personal Information
+            </h3>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="patientName">Patient Name <span class="required">*</span></label>
+                <input
+                  id="patientName"
+                  type="text"
+                  formControlName="patientName"
+                  class="form-control"
+                  [class.error]="submitted() && f.patientName.invalid"
+                  placeholder="Enter your full name"
+                  autocomplete="name"
+                />
+                @if (submitted() && f.patientName.errors?.['required']) {
+                  <span class="error-msg">Name is required.</span>
+                }
+                @if (submitted() && f.patientName.errors?.['minlength']) {
+                  <span class="error-msg">Name must be at least 2 characters.</span>
+                }
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Phone Number <span class="required">*</span></label>
+                <input
+                  id="phone"
+                  type="tel"
+                  formControlName="phone"
+                  class="form-control"
+                  [class.error]="submitted() && f.phone.invalid"
+                  placeholder="10-digit mobile number"
+                  maxlength="10"
+                  autocomplete="tel"
+                />
+                @if (submitted() && f.phone.errors?.['required']) {
+                  <span class="error-msg">Phone number is required.</span>
+                }
+                @if (submitted() && f.phone.errors?.['pattern']) {
+                  <span class="error-msg">Enter a valid 10-digit number starting with 6–9.</span>
+                }
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address <span class="required">*</span></label>
+              <input
+                id="email"
+                type="email"
+                formControlName="email"
+                class="form-control"
+                [class.error]="submitted() && f.email.invalid"
+                placeholder="your@email.com"
+                autocomplete="email"
+              />
+              @if (submitted() && f.email.errors?.['required']) {
+                <span class="error-msg">Email address is required.</span>
+              }
+              @if (submitted() && f.email.errors?.['email']) {
+                <span class="error-msg">Please enter a valid email address.</span>
+              }
+            </div>
+          </div>
+
+          <!-- SECTION 2: Appointment Details -->
+          <div class="form-section">
+            <h3 class="form-section-title">
+              <span class="section-number">2</span>
+              Appointment Details
+            </h3>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="service">Select Service <span class="required">*</span></label>
+                <select
+                  id="service"
+                  formControlName="service"
+                  class="form-control"
+                  [class.error]="submitted() && f.service.invalid"
+                >
+                  <option value="">-- Choose a service --</option>
+                  @for (s of services(); track s.id) {
+                    <option [value]="s.id">{{ s.name }}</option>
+                  }
+                </select>
+                @if (submitted() && f.service.errors?.['required']) {
+                  <span class="error-msg">Please select a service.</span>
+                }
+              </div>
+
+              <div class="form-group">
+                <label for="doctorId">Select Doctor <span class="required">*</span></label>
+                <select
+                  id="doctorId"
+                  formControlName="doctorId"
+                  class="form-control"
+                  [class.error]="submitted() && f.doctorId.invalid"
+                >
+                  <option value="">-- Choose a doctor --</option>
+                  @for (d of doctors(); track d.id) {
+                    <option [value]="d.id">{{ d.name }} ({{ d.specialization }})</option>
+                  }
+                </select>
+                @if (submitted() && f.doctorId.errors?.['required']) {
+                  <span class="error-msg">Please select a doctor.</span>
+                }
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="date">
+                  Preferred Date <span class="required">*</span>
+                  <small class="hint">Closed on Sundays</small>
+                </label>
+                <input
+                  id="date"
+                  type="date"
+                  formControlName="date"
+                  class="form-control"
+                  [class.error]="submitted() && f.date.invalid"
+                  [min]="minDate"
+                />
+                @if (submitted() && f.date.errors?.['required']) {
+                  <span class="error-msg">Please select a date.</span>
+                }
+                @if (submitted() && f.date.errors?.['pastDate']) {
+                  <span class="error-msg">Please select today or a future date.</span>
+                }
+                @if (submitted() && f.date.errors?.['sunday']) {
+                  <span class="error-msg">We are closed on Sundays. Please choose another day.</span>
+                }
+              </div>
+
+              <div class="form-group">
+                <label for="timeSlot">
+                  Time Slot <span class="required">*</span>
+                  @if (timeSlots().length === 0) {
+                    <small class="hint">Select doctor &amp; date first</small>
+                  }
+                </label>
+                <select
+                  id="timeSlot"
+                  formControlName="timeSlot"
+                  class="form-control"
+                  [class.error]="submitted() && f.timeSlot.invalid"
+                >
+                  <option value="">
+                    {{ timeSlots().length === 0 ? '-- Select doctor & date first --' : '-- Choose a time --' }}
+                  </option>
+                  @for (slot of timeSlots(); track slot) {
+                    <option [value]="slot">{{ slot }}</option>
+                  }
+                </select>
+                @if (submitted() && f.timeSlot.errors?.['required']) {
+                  <span class="error-msg">Please select a time slot.</span>
+                }
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 3: Message -->
+          <div class="form-section">
+            <h3 class="form-section-title">
+              <span class="section-number">3</span>
+              Additional Information
+              <span class="optional-tag">Optional</span>
+            </h3>
+
+            <div class="form-group">
+              <label for="message">Message <small class="hint">(Max 300 characters)</small></label>
+              <textarea
+                id="message"
+                formControlName="message"
+                class="form-control"
+                [class.error]="submitted() && f.message.invalid"
+                placeholder="Describe your symptoms or any special requirements..."
+                rows="4"
+              ></textarea>
+              <div class="char-count" [class.over]="messageLength() > 300">
+                {{ messageLength() }} / 300
+              </div>
+              @if (submitted() && f.message.errors?.['maxlength']) {
+                <span class="error-msg">Message cannot exceed 300 characters.</span>
+              }
+            </div>
+          </div>
+
+          <!-- SUBMIT -->
+          <div class="form-submit">
+            <button
+              type="submit"
+              class="btn btn--primary submit-btn"
+              [class.loading]="loading()"
+            >
+              @if (loading()) {
+                <span class="btn-spinner"></span>
+                Booking...
+              } @else {
+                📅 Confirm Appointment
+              }
+            </button>
+            <p class="form-disclaimer">
+              By booking, you agree to receive confirmation calls/SMS. No spam.
+            </p>
+          </div>
+        </form>
+
+        <!-- Side Info Panel -->
+        <aside class="appt-sidebar animate-on-scroll">
+          <div class="sidebar-card">
+            <h3>📍 Location</h3>
+            <p>123, Shivaji Nagar, Near FC Road<br>Pune – 411005, Maharashtra</p>
+          </div>
+          <div class="sidebar-card">
+            <h3>🕐 Working Hours</h3>
+            <div class="hours-list">
+              <div class="hours-item"><span>Mon – Fri</span><span>9 AM – 7 PM</span></div>
+              <div class="hours-item"><span>Saturday</span><span>9 AM – 5 PM</span></div>
+              <div class="hours-item closed"><span>Sunday</span><span>Closed</span></div>
+            </div>
+          </div>
+          <div class="sidebar-card emergency">
+            <h3>🚨 Dental Emergency?</h3>
+            <p>Call us immediately for same-day emergency care.</p>
+            <a href="tel:+919876543210" class="btn btn--accent emergency-btn">
+              📞 +91 98765 43210
+            </a>
+          </div>
+        </aside>
+      </div>
+    }
+  </div>
+</section>

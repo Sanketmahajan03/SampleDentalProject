@@ -1,0 +1,46 @@
+<div class="page-hero">
+  <div class="container">
+    <span class="subtitle-tag">Our Clinic</span>
+    <h1>Photo Gallery</h1>
+    <p>Take a peek inside our state-of-the-art facility and meet our team.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <!-- Filter Tabs -->
+    <div class="filter-tabs" role="tablist" aria-label="Gallery filters">
+      @for (filter of filters; track filter) {
+        <button
+          role="tab"
+          [attr.aria-selected]="activeFilter() === filter"
+          class="filter-btn"
+          [class.active]="activeFilter() === filter"
+          (click)="setFilter(filter)"
+        >{{ filter }}</button>
+      }
+    </div>
+
+    <!-- Masonry Grid -->
+    <div class="gallery-grid">
+      @for (item of filteredItems(); track item.id) {
+        <div
+          class="gallery-item animate-on-scroll"
+          [class]="'gallery-item gallery-item--' + item.size + ' animate-on-scroll'"
+          [style.background]="item.gradient"
+          role="img"
+          [attr.aria-label]="item.label"
+        >
+          <div class="gallery-overlay">
+            <span class="gallery-label">{{ item.label }}</span>
+            <span class="gallery-category">{{ item.category }}</span>
+          </div>
+        </div>
+      }
+    </div>
+
+    @if (filteredItems().length === 0) {
+      <p class="no-items">No items in this category.</p>
+    }
+  </div>
+</section>

@@ -1,0 +1,124 @@
+.services-detail-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.service-detail-card {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 32px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 24px;
+  }
+}
+
+.sdc-icon {
+  font-size: 3.5rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 4px;
+
+  @media (max-width: 640px) {
+    justify-content: flex-start;
+    font-size: 2.5rem;
+  }
+}
+
+.sdc-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sdc-name {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--text);
+  margin: 0;
+}
+
+.sdc-desc {
+  font-size: 0.95rem;
+  color: var(--text-body);
+  line-height: 1.75;
+}
+
+.sdc-meta {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.sdc-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sdc-meta-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sdc-meta-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* CTA Strip */
+.services-cta-strip {
+  background: var(--primary-pale);
+  border-top: 1px solid var(--border);
+  padding: 36px 0;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+
+    @media (max-width: 640px) {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  p {
+    color: var(--text-body);
+    font-size: 1rem;
+
+    strong { color: var(--primary); }
+  }
+}
+
+.cta-strip-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+
+  @media (max-width: 640px) {
+    justify-content: center;
+  }
+}

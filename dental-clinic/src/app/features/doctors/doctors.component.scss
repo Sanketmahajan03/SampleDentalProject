@@ -1,0 +1,136 @@
+.doctors-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+.doctor-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.doctor-header {
+  background: linear-gradient(135deg, var(--primary-pale) 0%, var(--accent-pale) 100%);
+  padding: 32px 28px 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.doctor-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-md);
+  flex-shrink: 0;
+}
+
+.availability-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+
+  &.available {
+    background: #E8F5E9;
+    color: #2E7D32;
+  }
+
+  &.unavailable {
+    background: #FFF3E0;
+    color: #E65100;
+  }
+}
+
+.doctor-info {
+  padding: 24px 28px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.doctor-name {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  color: var(--text);
+  margin: 0;
+}
+
+.doctor-specialization {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.exp-badge {
+  display: inline-block;
+  background: var(--primary-pale);
+  color: var(--primary);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.doctor-bio {
+  font-size: 0.875rem;
+  color: var(--text-body);
+  line-height: 1.75;
+}
+
+.doctor-footer {
+  padding: 0 28px 24px;
+}
+
+.disabled-btn {
+  opacity: 0.7;
+}
+
+.doctors-note {
+  background: var(--primary-pale);
+  padding: 20px 0;
+  text-align: center;
+
+  p {
+    color: var(--text-body);
+    font-size: 0.875rem;
+
+    a {
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: underline;
+
+      &:hover { color: var(--primary-light); }
+    }
+  }
+}
