@@ -43,8 +43,9 @@
           "builder": "@angular/build:application",
           "options": {
             "browser": "src/main.ts",
+            "prerender": false,
+            "ssr": false,
             "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
