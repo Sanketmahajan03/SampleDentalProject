@@ -23,7 +23,7 @@ export class FooterComponent {
 
   readonly phone = '9876543210';
   readonly email = 'info@smilecare.in';
-  readonly address = '123, Shivaji Nagar, Near FC Road, Pune – 411005, Maharashtra';
+  readonly address = 'Vastu Avenue, Gangapur - Satpur Link Rd, beside marble house, near motilal college, Dhurav Nagar, Satpur Colony, Nashik, Maharashtra 422012';
 
   readonly workingHours = [
     { day: 'Monday – Friday', hours: '9:00 AM – 7:00 PM' },
