@@ -41,7 +41,7 @@
 | Phone | +91 98765 43210 |
 | Email | info@smilecare.in |
 | WhatsApp | wa.me/919876543210 |
-| Address | Vastu Avenue, Gangapur - Satpur Link Rd, beside marble house, near motilal college, Dhurav Nagar, Satpur Colony, Nashik, Maharashtra 422012 |
+| Address | Vastu Avenue, Gangapur - Satpur Link Rd, beside marble house, near motiwala college, Dhurav Nagar, Satpur Colony, Nashik, Maharashtra 422012 |
 | Emergency Phone | +91 99999 99999 |
 
 **Working Hours:**

@@ -26,7 +26,7 @@ export class ContactComponent implements OnInit, AfterViewInit {
 
   readonly phone = '9876543210';
   readonly email = 'info@smilecare.in';
-  readonly address = 'Vastu Avenue, Gangapur - Satpur Link Rd, beside marble house, near motilal college, Dhurav Nagar, Satpur Colony, Nashik, Maharashtra 422012';
+  readonly address = 'Vastu Avenue, Gangapur - Satpur Link Rd, beside marble house, near motiwala college, Dhurav Nagar, Satpur Colony, Nashik, Maharashtra 422012';
   readonly emergencyPhone = '9999999999';
 
   readonly mapUrl: SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
